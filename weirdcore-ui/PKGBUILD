@@ -1,0 +1,16 @@
+pkgname=weirdcore-ui
+pkgver=0.0.5
+pkgrel=1
+pkgdesc="UI for Weirdcore linux"
+arch=('any')
+license=('MIT')
+# Указываем в зависимостях всё, что нужно для работы твоего интерфейса
+depends=('hyprland' 'waybar' 'rofi-lbonn-git' 'swww' 'mako' 'alacritty')
+
+package() {
+    # Создаем папку настроек /etc/skel/.config в будущем пакете
+    mkdir -p "${pkgdir}/etc/skel/.config"
+    
+    # Копируем локальную папку .config со всеми подпапками (hypr, waybar) внутрь пакета
+    cp -r "${srcdir}/../.config/"* "${pkgdir}/etc/skel/.config/"
+}

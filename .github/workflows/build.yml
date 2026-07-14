@@ -1,4 +1,4 @@
-name: Build NextOS Repo
+name: Build System Package
 
 on:
   push:
@@ -36,21 +36,23 @@ jobs:
       # 4. Собираем наш пакет nextos-welcome утилитой makepkg
       - name: Build Package
         run: |
-          sudo -u build bash -c "cd nextos-welcome && makepkg -s --noconfirm"
+          PACKAGES=("nextos-desktop-settings")
+          
+          for pkg in "${PACKAGES[@]}"; do
+            echo "==> Сборка пакета: $pkg"
+            chown -R build:build "$pkg"
+            sudo -u build bash -c "cd $pkg && makepkg -s --noconfirm"
+          done
 
       # 5. Импортируем твой GPG-ключ из секретов GitHub и подписываем пакет + создаем базу данных
       - name: Sign and Create Repo Database
         run: |
-          # Создаем папку для готового репозитория
           mkdir -p output
           
-          # Копируем скомпилированный пакет (.pkg.tar.zst) в папку output
-          cp nextos-welcome/*.pkg.tar.zst output/
+          find . -name "*.pkg.tar.zst" -exec cp {} output/ \;
           
-          # Импортируем твой секретный ключ из секретов GitHub Actions
           echo "${{ secrets.GPG_PRIVATE_KEY }}" | gpg --batch --import
           
-          # Переходим в папку и создаем базу данных, подписывая её твоим Key ID
           cd output
           repo-add --sign --key "D58CDACC916A86D0" nextos-core.db.tar.gz *.pkg.tar.zst
 

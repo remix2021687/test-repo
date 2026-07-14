@@ -1,0 +1,89 @@
+* {
+    font-family: "JetBrainsMono Nerd Font", "Font Awesome 6 Free";
+    font-size: 13px;
+    font-weight: bold;
+}
+
+window#waybar {
+    background: none;
+    color: #eeeeee;
+}
+
+.modules-right {
+    padding: 0 5px;
+    background-color: rgba(0, 0, 0, 0.50);
+    border-radius: 6px;
+}
+
+
+
+#workspaces {
+    border-radius: 10px;
+    background-color:rgba(0, 0, 0, 0.50);
+}
+
+#workspaces button {
+    margin: 10px 8px;
+    border: none;
+    border-radius: 10px;
+    transition: 0.5s ease;
+}
+
+#workspaces button.active {
+    color: rgba(255, 0, 0, 0.7);
+}
+
+
+#clock, #battery, #tray, #network, #pulseaudio, #language, #custom-power {
+    font-size: 15px;
+    padding: 10px 20px;
+    margin: 10px 4px;
+    background-color: rgba(0, 0, 0, 0.70);
+    border-radius: 10px;
+}
+
+#custom-power {
+    font-size: 20px;
+    transition: all 0.2s ease;
+}
+
+#custom-power:hover {
+    background-color: rgba(0, 0, 0, 0.30);
+    border-radius: 10px;
+}
+
+/* === Стили самого нативного меню === */
+menu {
+    background-color: #1e1e2e;
+    border: 2px solid #FFF;
+    border-radius: 10px;
+    padding: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+menuitem {
+    padding: 10px 24px;
+    font-size: 15px;
+    color: #cdd6f4;
+}
+
+menuitem:hover {
+    background-color: #313244;
+    border-radius: 8px;
+}
+
+menu separator {
+    background-color: #45475a;
+    margin: 4px 12px;
+}
+
+#battery.critical {
+    color: #f38ba8;
+}
+
+#clock {
+    background-color:rgba(0, 0, 0, 0.50);
+    border-radius: 10px;
+    font-weight: bold;
+
+}
